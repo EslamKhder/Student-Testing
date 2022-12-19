@@ -2,6 +2,7 @@ package com.spring.student.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,19 @@ public class StudentServiceImplTest {
         StudentDto studentDto = studentService.editStudent(student);
         Assertions.assertEquals(1,studentDto.getId());
         Assertions.assertEquals("Ahmed",studentDto.getName());
+        Assertions.assertEquals(20,studentDto.getAge());
+        Assertions.assertEquals("01113903660",studentDto.getPhone());
+        Assertions.assertTrue(studentDto.isActive());
+    }
+
+    @Test
+    public void getStudentById_thenValidate(){
+        studentService = new StudentServiceImpl(studentRepo);
+        Student student = createStudentWithID(1L,"Islam",20,"01113903660",true);
+        Mockito.when(studentRepo.findById(1L)).thenReturn(Optional.of(student));
+        StudentDto studentDto = studentService.getStudentById(1L);
+        Assertions.assertEquals(1,studentDto.getId());
+        Assertions.assertEquals("Islam",studentDto.getName());
         Assertions.assertEquals(20,studentDto.getAge());
         Assertions.assertEquals("01113903660",studentDto.getPhone());
         Assertions.assertTrue(studentDto.isActive());
