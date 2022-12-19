@@ -81,6 +81,12 @@ public class StudentServiceImplTest {
         Assertions.assertTrue(studentDto.isActive());
     }
 
+    @Test
+    public void deleteStudent_thenValidate(){
+        studentService = new StudentServiceImpl(studentRepo);
+        studentService.deleteStudent(1L);
+        Mockito.verify(studentRepo,Mockito.times(1)).deleteById(1L);
+    }
     private Student createStudent(String name,int age,String phone, boolean active){
         return new Student(name,age,phone,active);
     }
