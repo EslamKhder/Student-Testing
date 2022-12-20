@@ -25,7 +25,7 @@ public class StudentServiceImplTest {
     private StudentRepo studentRepo;
 
     @Test
-    public void createStudent_thenValidate(){
+    public void createStudent_thenValidate() throws Exception {
         studentService = new StudentServiceImpl(studentRepo);
         Student student = createStudent("Islam",20,"01113903660",true);
 

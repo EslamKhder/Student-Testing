@@ -26,7 +26,7 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/create")
-    public ResponseEntity<StudentDto> createStudent(@RequestBody Student student){
+    public ResponseEntity<StudentDto> createStudent(@RequestBody Student student) throws Exception {
         return ResponseEntity.ok(studentService.createStudent(student));
     }
     @GetMapping("/getAll")

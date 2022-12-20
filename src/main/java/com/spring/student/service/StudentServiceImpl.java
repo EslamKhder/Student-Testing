@@ -2,6 +2,7 @@ package com.spring.student.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,10 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public StudentDto createStudent(Student student) {
+    public StudentDto createStudent(Student student) throws Exception {
+        if (student.getId() > 0 || student.getId() < 0) {
+            throw new Exception("you must not send id");
+        }
         return studentDto(studentRepo.save(student)); // not send id
     }
 

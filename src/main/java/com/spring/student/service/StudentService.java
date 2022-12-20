@@ -10,7 +10,7 @@ import com.spring.student.model.StudentDto;
 @Service
 public interface StudentService {
     
-    public StudentDto createStudent(Student student);
+    public StudentDto createStudent(Student student) throws Exception;
     public List<StudentDto> getAllStudent();
     public void deleteStudent(Long id);
     public StudentDto editStudent(Student student);
