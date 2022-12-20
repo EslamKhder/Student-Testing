@@ -40,6 +40,17 @@ public class StudentServiceImplTest {
     }
 
     @Test
+    public void createStudent_thenThrowException() throws Exception {
+        studentService = new StudentServiceImpl(studentRepo);
+        Student student = createStudentWithID(1L,"Islam",20,"01113903660",true);
+
+        Exception exception = Assertions.assertThrows(Exception.class,
+                () -> studentService.createStudent(student));
+
+        Assertions.assertEquals("you must not send id",exception.getMessage());
+    }
+
+    @Test
     public void getAllStudent_thenValidate(){
         studentService = new StudentServiceImpl(studentRepo);
         Mockito.when(studentRepo.findAll()).thenReturn(studentList());
