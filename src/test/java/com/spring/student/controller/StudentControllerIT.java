@@ -1,11 +1,8 @@
 package com.spring.student.controller;
 
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,8 +10,6 @@ import com.spring.student.Repo.StudentRepo;
 import com.spring.student.StudentTestingApplicationTests;
 import com.spring.student.model.Student;
 import com.spring.student.model.StudentDto;
-import com.spring.student.util.DataUtil;
-import com.spring.student.util.RequestUtil;
 
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
