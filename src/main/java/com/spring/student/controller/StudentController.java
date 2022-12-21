@@ -3,6 +3,7 @@ package com.spring.student.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class StudentController {
 
     @PostMapping("/create")
     public ResponseEntity<StudentDto> createStudent(@RequestBody Student student) throws Exception {
-        return ResponseEntity.ok(studentService.createStudent(student));
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(student));
     }
     @GetMapping("/getAll")
     public ResponseEntity<List<StudentDto>> getAllStudent(){
