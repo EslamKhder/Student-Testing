@@ -44,10 +44,21 @@ public class StudentServiceImplTest {
         studentService = new StudentServiceImpl(studentRepo);
         Student student = createStudentWithID(1L,"Islam",20,"01113903660",true);
 
-        Exception exception = Assertions.assertThrows(Exception.class,
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> studentService.createStudent(student));
 
         Assertions.assertEquals("you must not send id",exception.getMessage());
+    }
+
+    @Test
+    public void createStudent_thenThrowRuntimeException() throws Exception {
+        studentService = new StudentServiceImpl(studentRepo);
+        Student student = createStudentWithID(-1L,"Islam",20,"01113903660",true);
+
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class,
+                () -> studentService.createStudent(student));
+
+        Assertions.assertEquals("invalid id (id< 0) and you must not send id",exception.getMessage());
     }
 
     @Test

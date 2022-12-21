@@ -18,7 +18,7 @@ import com.spring.student.model.StudentDto;
 import com.spring.student.service.StudentService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/student")
 public class StudentController {
 
 
