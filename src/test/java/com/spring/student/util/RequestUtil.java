@@ -51,6 +51,27 @@ public class RequestUtil {
         return restTemplate.exchange(url, HttpMethod.POST,httpEntity,responseType);
     }
 
+    public <T>ResponseEntity<T> put(String path, @Nullable Object body,
+                                     Map<String,Object> headers,Class<T> responseType){
+        String url = String.format("http://localhost:%s/%s",serverPort,path);
+        HttpEntity httpEntity = getHttpEntity(body,headers);
+        return restTemplate.exchange(url, HttpMethod.PUT,httpEntity,responseType);
+    }
+
+    public <T>ResponseEntity<T> get(String path, @Nullable Object body,
+                                    Map<String,Object> headers,Class<T> responseType){
+        String url = String.format("http://localhost:%s/%s",serverPort,path);
+        HttpEntity httpEntity = getHttpEntity(body,headers);
+        return restTemplate.exchange(url, HttpMethod.GET,httpEntity,responseType);
+    }
+
+    public <T>ResponseEntity<T> delete(String path, @Nullable Object body,
+                                    Map<String,Object> headers,Class<T> responseType){
+        String url = String.format("http://localhost:%s/%s",serverPort,path);
+        HttpEntity httpEntity = getHttpEntity(body,headers);
+        return restTemplate.exchange(url, HttpMethod.DELETE,httpEntity,responseType);
+    }
+
     private HttpEntity getHttpEntity(@Nullable Object body,
                                      Map<String,Object> headers){
         HttpHeaders httpHeaders = getHttpHeaders(headers);
