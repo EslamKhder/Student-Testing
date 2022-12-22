@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.student.Repo.StudentRepo;
 import com.spring.student.StudentApplicationIT;
 import com.spring.student.model.Student;
 import com.spring.student.model.StudentDto;
@@ -21,6 +22,8 @@ public class StudentControllerIT extends StudentApplicationIT {
     private RequestUtil requestUtil;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private StudentRepo studentRepo;
 
     @Test
     public void createStudent_thenValidate() throws JsonProcessingException {
@@ -38,6 +41,9 @@ public class StudentControllerIT extends StudentApplicationIT {
         Assertions.assertEquals(22,studentDto.getAge());
         Assertions.assertEquals("01113903660",studentDto.getPhone());
         Assertions.assertTrue(studentDto.isActive());
+        System.out.println(studentDto.getId());
+
+        studentRepo.deleteById(studentDto.getId());
     }
 
     @Test
