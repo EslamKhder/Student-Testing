@@ -92,16 +92,22 @@ public class StudentControllerIT extends StudentApplicationIT {
     }
 
     @Test
-    public void editStudent_thenValidate(){
+    public void editStudent_thenValidate() throws JsonProcessingException {
         Student student = new Student();
-        student.setId(1);
         student.setName("Karim");
         student.setAge(21);
         student.setPhone("0122588885");
         student.setActive(false);
-        ResponseEntity<Object> responseEntity =
-                requestUtil.put("/api/edit",student,null,Object.class);
+        student = studentRepo.save(student);
+        student.setName("Ahmed");
+        ResponseEntity<String> responseEntity =
+                requestUtil.put("/api/edit",student,null,String.class);
+        StudentDto studentDto = objectMapper.readValue(responseEntity.getBody(),StudentDto.class);
         Assertions.assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
+        Assertions.assertEquals("Ahmed",studentDto.getName());
+
+        studentRepo.deleteById(student.getId());
+
     }
 
     @Test
