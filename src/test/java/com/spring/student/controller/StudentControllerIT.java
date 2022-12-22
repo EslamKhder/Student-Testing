@@ -14,6 +14,7 @@ import com.spring.student.Repo.StudentRepo;
 import com.spring.student.StudentApplicationIT;
 import com.spring.student.model.Student;
 import com.spring.student.model.StudentDto;
+import com.spring.student.util.DataUtil;
 import com.spring.student.util.RequestUtil;
 
 public class StudentControllerIT extends StudentApplicationIT {
@@ -24,6 +25,8 @@ public class StudentControllerIT extends StudentApplicationIT {
     private ObjectMapper objectMapper;
     @Autowired
     private StudentRepo studentRepo;
+    @Autowired
+    private DataUtil dataUtil;
 
     @Test
     public void createStudent_thenValidate() throws JsonProcessingException {
@@ -42,7 +45,8 @@ public class StudentControllerIT extends StudentApplicationIT {
         Assertions.assertEquals("01113903660",studentDto.getPhone());
         Assertions.assertTrue(studentDto.isActive());
 
-        studentRepo.deleteById(studentDto.getId());
+        //studentRepo.deleteById(studentDto.getId());
+        dataUtil.delete(studentDto);
     }
 
     @Test
@@ -59,8 +63,8 @@ public class StudentControllerIT extends StudentApplicationIT {
         student2.setPhone("010258875");
         student2.setActive(false);
 
-        student1 = studentRepo.save(student1);
-        student2 = studentRepo.save(student2);
+        studentRepo.save(student1);
+        studentRepo.save(student2);
 
         ResponseEntity<String> responseEntity =
                 requestUtil.get("/api/getAll",null,null,String.class);
@@ -74,8 +78,9 @@ public class StudentControllerIT extends StudentApplicationIT {
         Assertions.assertEquals("010258875",studentListDto[1].getPhone());
         Assertions.assertFalse(studentListDto[1].isActive());
 
-        studentRepo.deleteById(student1.getId());
-        studentRepo.deleteById(student2.getId());
+        /*studentRepo.deleteById(student1.getId());
+        studentRepo.deleteById(student2.getId());*/
+        dataUtil.delete(studentListDto);
     }
 
     @Test
@@ -106,7 +111,8 @@ public class StudentControllerIT extends StudentApplicationIT {
         Assertions.assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
         Assertions.assertEquals("Ahmed",studentDto.getName());
 
-        studentRepo.deleteById(student.getId());
+        //studentRepo.deleteById(student.getId());
+        dataUtil.delete(studentDto);
 
     }
 
@@ -128,6 +134,7 @@ public class StudentControllerIT extends StudentApplicationIT {
         Assertions.assertEquals("0122588885",studentDto.getPhone());
         Assertions.assertFalse(studentDto.isActive());
 
-        studentRepo.deleteById(student.getId());
+        //studentRepo.deleteById(student.getId());
+        dataUtil.delete(studentDto);
     }
 }
